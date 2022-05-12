@@ -1,5 +1,6 @@
 import React, {useState, Fragment} from 'react'
 import image from '../images/user.jpg'
+import Follow from './Follow'
 export default function User() {
     const style = {
         padding : "10px"
@@ -17,12 +18,10 @@ export default function User() {
         state : false
     })
     const handleChange = () => {
-        setContact(prevContact => {
-            return{
-                ...prevContact, 
-                state : !contact.state
-            }
-        })
+        setContact(prevContact => ({
+            ...prevContact, 
+            state: !prevContact.state
+        }))
     }
   return (
     <div className={style}>
@@ -38,11 +37,10 @@ export default function User() {
                 <p className="card-text" style = {paragraphs}>
                     <span><ion-icon name="call-outline"></ion-icon> : {contact.phone}</span>
                 </p>
-                <a href="#"
-                onClick={handleChange}
-                className="btn btn-primary mt-3">
-                    {contact.state ? "Folloing...." : "Follow"}
-                </a>
+                <Follow 
+                isFollow={contact.state}
+                handleClick={handleChange}
+                />
             </div>
         </div>
     </div>
